@@ -1,0 +1,99 @@
+.container__box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url("/CSS_7_8_day/images/다운로드\ \(6\).gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.container__box__text{
+    width: 400px;
+    height: 300px;
+    background-color: rgb(65, 65, 65);
+    opacity: 0.9;
+    text-align: center;
+    color: white;
+    font-size: 48px;
+    box-sizing: border-box;
+    padding: 50px;
+    font-weight: 700;
+}
+
+@media screen and (min-width:1080px) and (max-width:1920px) {
+    .container__box__text::after{
+        content: "1920 x 1080 FHD 24인치";
+        color: rgb(242, 18, 18, 1);
+        opacity: 1;
+    }
+    .container__box{
+        opacity: 1;
+    }
+}
+
+/* PC , 테블릿 가로 (해상도 768px ~ 1023px) */
+@media screen and (min-width:768px) and (max-width:1023px) {
+    .container__box__text::after{
+        content: "PC , 테블릿 가로 (해상도 768px ~ 1023px)";
+        color: rgba(255, 106, 0, 1);
+        opacity: 1;
+    }
+    .container__box{
+        opacity: 0.8;
+    }
+}
+
+/* 테블릿 세로 (해상도 768px ~ 1023px) */
+@media screen and (min-width:768px) and (max-width:1023px) { 
+    .container__box__text::after{
+        content: "테블릿 세로 (해상도 768px ~ 1023px)";
+        color: rgb(255, 196, 0, 1);
+    }
+    .container__box{
+        opacity: 0.6;
+    }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px) */
+@media screen and (min-width:480px) and (max-width:767px) {
+    .container__box__text::after{
+        content: "모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)";
+        color: rgb(96, 246, 10, 1);
+    }
+    .container__box{
+        opacity: 0.4;
+    }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 ~ 479px) */
+@media screen and (max-width:479px) {
+    .container__box__text::after{
+        content: "모바일 가로, 테블릿 세로 (해상도 ~ 479px)";
+        color: rgb(11, 14, 241, 1);
+    }
+    .container__box{
+        opacity: 0.2;
+    }
+}
+
+
+/* 
+- 1920 x 1080 FHD 24인치
+- 1536 x 864 FHD 노트북의 해상도
+- 1366 x 768 노트북
+- 1280 x 720 HD
+
+1. 낮은 해상도의 PC, 태블릿 가로 : ~1024px 
+2. 테블릿 가로 : 768px ~ 1023px
+3. 모바일 가로, 태블릿 : 480px ~ 767px
+4. 모바일 : ~ 480px
+출처: https://eunyoe.tistory.com/17 [eunyo의 it이야기:티스토리]
+
+*/
+

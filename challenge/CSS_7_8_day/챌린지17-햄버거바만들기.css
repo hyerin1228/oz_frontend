@@ -1,0 +1,75 @@
+div{
+    display: block;
+}
+
+ul{
+    list-style: none;
+    
+}
+
+.header__ul{
+    display: flex;
+    background-color: gray;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 40px;
+    box-shadow: 2px 1px 5px #786060;
+}
+
+.header__li{
+    display: inline-block;
+    width: 50px;
+    color: white;
+    background-color: gray;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.header__li:nth-child(1){
+    background-color: darkcyan;
+}
+
+
+@media screen and (max-width: 550px) {
+    .header__ul{
+        display: none;
+    }
+    .header__li{
+        display: none;
+    }
+
+    .header__div::before{
+        content: "";
+        background-image: url("/CSS_7_8_day/images/list-plus-bold.svg");
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        margin: 0 auto;
+        position: relative;
+        left: 45%;
+    }
+
+    .header__div:hover{
+        .header__ul{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            overflow: visible;
+        }
+
+        .header__li{
+            display: inline-block;
+            background-color: gray;
+            width: 100%;
+        }
+
+        .header__li:nth-child(1){
+            background-color: darkcyan;
+        }
+
+    }
+}
