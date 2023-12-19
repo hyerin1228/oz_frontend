@@ -1,0 +1,199 @@
+/* 공통 부분 */
+
+*{
+    box-sizing: border-box;
+}
+html{
+    font-size: 16px;
+}
+body{
+    /* body의 기본 마진 제거 */
+    margin: 0;
+}
+
+.div{
+    display: block;
+}
+
+.flex{
+    display: flex;
+}
+.main{
+    /* height: auto; */
+    /* height: 100vw; */
+    padding: 0 0 5rem;
+    height: auto;
+}
+
+
+/* 1.헤더 */
+.header{
+    height: 39vw;
+}
+
+/* 1.1 헤더-배너 */
+header .header-banner{
+    background-image: url(images/cat1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 480px;
+    opacity: 0.75;
+    justify-content: center;
+}
+
+header .header-banner h1{
+    font-size: 3rem;
+    align-self: flex-end;
+    color: white;
+    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}
+
+header .header-banner h1::before{
+    content:"🥊 ";
+}
+
+header .header-banner h1::after{
+    content:" 👀";
+}
+
+/* 1.2 헤더-네비게이션 */
+.header .header-content{
+    /* 헤더가 항상 위쪽에 고정되어있음 */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    color: black;
+}
+
+.header-content{
+    width: 100%;
+    height: 4rem; 
+    /* height: 4rem; =  64px */
+    padding: 0.75rem 1rem;
+    margin: auto 0 auto 0;
+    /*  margin: auto; = 양 끝의 여백을 동일하게 지정 */
+    justify-content: space-between;
+    /* justify-content: space-between; = 요소가 양끝으로 펼쳐지게 */
+    background-color: rgb(252, 241, 211);
+
+}
+
+.header-content__logo{
+    color: #000000;
+    font-size: 4rem;
+    font-weight: 900;
+
+    height: 1em;
+    margin-right: 40px;
+    line-height: 40px;
+    float: left;
+}
+
+.header-content__nav{
+    flex-direction: column;
+    align-items: end;
+    /*  align-items: center; = flex 컨테이너를 교차축(세로축)에서 가운데정렬 */
+    padding: 0.8rem 2.5rem 0 0;
+    flex-grow: 1;
+    
+}
+
+.header-content__nav ul{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.header-content__nav ul li{
+    /* display: inline-block; - 양 옆으로 펼쳐짐 */
+    display: inline-block;
+    /* 서로간의 간격 조정 */
+    margin-right: 30px;
+    font-size: 1.13rem;
+    font-weight: 900;
+}
+
+.header-content__nav ul li.active{
+    color: #8e694b;
+}
+
+
+/* 768px 작은 경우에는 */
+/* @media screen and (max-width: 768px){
+    .header-content__nav span{
+        display: block;
+    }
+    .header-content__nav li{
+        display: none;
+    }
+} */
+
+/* 최대 가로너비가 768일때까지 */
+
+.header-content__nav span{
+    display: none;
+}
+
+@media screen and (max-width: 768px){
+    .header-content__nav span{
+        display: block;
+    }
+    
+    .header-content__nav > ul > li{
+        display: none;
+    }
+}
+
+
+
+
+
+
+/* main__content */
+.main__content{
+    width: 100%;
+    height: auto;
+    background-color: #c59b79;
+}
+.main__content__text{
+    /* 화면 크기에 따라서 줄어들 수 있어야한다. */
+    height: 20vw;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 1rem 1rem 1rem 1rem;
+    text-align: center;
+
+}
+
+.main__content__text h1{
+    display: block;
+    margin: 0;
+    font-size: 4rem;
+    line-height: 3.2rem;
+}
+
+.main__content__text span{
+    margin: 1rem 0 0;
+    font-size: 2.125rem;
+    line-height: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .info{
+        height: 18.375rem;
+    
+    }
+    .info__text{
+        /* 패딩이 작아지게 만들기 위한 설정 */
+        padding: 1.5rem 1rem 0;
+    }
+    .info__text h1{
+        /* 작아졌을때 행간격 너무 커서 줄임 */
+        line-height: 2rem;
+        font-size: 1.5rem;
+    }
+    .info__text p{
+        display: none;
+    }
+}
