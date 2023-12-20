@@ -25,6 +25,11 @@ body{
     height: auto;
 }
 
+a{
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
 
 /* 1.헤더 */
 .header{
@@ -50,10 +55,21 @@ header .header-banner h1{
 
 header .header-banner h1::before{
     content:"🥊 ";
+    animation: logoAnimation 0.8s infinite linear;
 }
 
 header .header-banner h1::after{
     content:" 👀";
+    animation: logoAnimation 0.8s infinite linear;
+}
+
+@keyframes logoAnimation {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 /* 1.2 헤더-네비게이션 */
@@ -143,6 +159,11 @@ header .header-banner h1::after{
     .header-content__nav > ul > li{
         display: none;
     }
+
+    .main__content__cardItem{
+        flex-direction: column;
+        column-gap: 20px;
+    }
 }
 
 
@@ -197,3 +218,84 @@ header .header-banner h1::after{
         display: none;
     }
 }
+
+
+
+/* main__content__cardItem */
+.main__content__cardItem{
+    display: flex;
+    padding: 1rem 1rem;
+    justify-content: center;
+    column-gap: 2rem;
+}
+
+/* 카드 아이템 개별 설정 */
+.container__card{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: auto;
+    background-color: skyblue;
+    border-radius: 25px;
+}
+
+.container__card .cardIcon{
+    height: 60%;
+    text-align: center;
+}
+
+.cardIcon img{
+    height: 100%;
+    margin: 2rem;
+}
+
+.container__card .cardTitle{
+    height: 20%;
+    text-align: center;
+    padding: 2.5rem;
+    color: darkorange;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.container__card .cardContent{
+    height: 20%;
+    text-align: center;
+    padding: 1rem;
+    color: rgb(149, 13, 240);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* 카드 focus 효과 */
+/* .container__card:hover{
+    filter: blur(1px);
+    -webkit-filter: blur(5px);
+} */
+
+/* .container__card:not(:hover){
+    #card{
+        filter: none;
+    }
+}
+
+.container__card:hover{
+    #card{
+        filter: blur(1px);
+        -webkit-filter: blur(5px);
+    }
+} */
+
+.main__content__cardItem:hover .container__card:not(:hover){
+    filter: blur(1px);
+    -webkit-filter: blur(5px);
+    transform: scale( 0.9 );
+    transition: transform 0.2s linear;
+}
+
+.container__card:hover{
+    filter: none;
+    transform: scale( 1 );
+    transition: transform 0.2s linear;
+}
+
