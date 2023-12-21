@@ -1,0 +1,353 @@
+/* 헤더 */
+
+
+
+header.header{
+    /* 헤더가 항상 위쪽에 고정되어있음 */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: white;
+    color: black;
+}
+
+.header-content{
+    width: 100%;
+    max-width: 75rem;
+    /*  max-width 화면에 꽉차게 하되 최대 일정 범위를 넘어가지 않게 한다 */
+    height: 4rem; 
+    /* height: 4rem; =  64px */
+    padding: 0.75rem 1rem;
+    margin: auto;
+    /*  margin: auto; = 양 끝의 여백을 동일하게 지정 */
+    justify-content: space-between;
+    /* justify-content: space-between; = 요소가 양끝으로 펼쳐지게 */
+
+}
+
+.header-content__logo{
+    color: #8e694b;
+    font-size: 2rem;
+    font-weight: 900;
+
+    height: 1em;
+    margin-right: 40px;
+    line-height: 40px;
+}
+
+.header-content__nav{
+    align-items: center;
+    /*  align-items: center; = flex 컨테이너를 교차축(세로축)에서 가운데정렬 */
+    padding: 0 2.5rem 0 0;
+    flex-grow: 1;
+}
+
+.header-content__nav ul{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.header-content__nav ul li{
+    /* display: inline-block; - 양 옆으로 펼쳐짐 */
+    display: inline-block;
+    /* 서로간의 간격 조정 */
+    margin-right: 30px;
+    font-size: 1.13rem;
+    font-weight: 900;
+}
+
+.header-content__nav ul li.active{
+    color: #8e694b;
+}
+
+.header-content__input{
+    justify-content: center;
+    /* 옹기종기 붙어있게 만들겠다 */
+    align-items: center;
+    /* 수직에서, 교차축에서 가운데정렬 */
+}
+
+.header-content__input .search{
+    width: 18rem;
+    height: 2.5rem;
+    padding: 0.5625rem 0.75rem;
+    background-color: #fcf3f6;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+
+.header-content__input .chat{
+    line-height: 1.3;
+    /* 글자 크기의 1.3배 */
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border: 0.5px solid #c5c6c9;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+.header-content__input .icon input{
+    margin-right: 1rem;
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+    background-color: transparent;
+}
+
+.header-content__input .icon{
+    display: none;
+}
+
+/* 1192px 작은 경우에는 */
+@media screen and (max-width: 1192px) {
+    .header-content__input .search{
+        display: none;
+    }
+    .header-content__input .glass{
+        display: block;
+    }
+}
+
+/* 948px 작은 경우에는 */
+@media screen and (max-width: 948px) {
+    .header-content__input .chat, .header-content__nav {
+        display: none;
+    }
+    .header-content__input .menu{
+        display: block;
+    }
+}
+
+
+/* 배너 */
+.banner{
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e5f5fd;
+    margin: 2.75rem 0 4 rem;;
+    padding: 1.75rem 1.5rem 1.75rem 2.0625rem;
+}
+
+.banner__text{
+    line-height: 1.3;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.banner__button{
+    margin: 0;
+    padding: 0.5rem 0.625rem;
+    line-height: 1.4;
+    font-size: 0.875rem;
+    background-color: #8e694b;
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+@media screen and (max-widht: 768px) {
+    .banner{
+        display: block;
+    }
+    .banner__text{
+        line-height: 1.3;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    .banner__button{
+        margin: 0.75rem 0 0;
+    }
+}
+
+/* 인포 */
+.info{
+    width: 100%;
+    height: 19.6875rem;
+    background-color: #c59b79;
+}
+.info__text{
+    /* 화면 크기에 따라서 줄어들 수 있어야한다. */
+    max-width: 48rem;
+    /* 가운데정렬 */
+    margin: auto;
+    padding: 3rem 1rem 0;
+}
+
+.info__text h1{
+    margin: 0;
+    font-size: 2rem;
+    line-height: 3.2rem;
+}
+
+.info__text p{
+    margin: 1rem 0 0;
+    font-size: 1.125rem;
+    line-height: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .info{
+        height: 18.375rem;
+    
+    }
+    .info__text{
+        /* 패딩이 작아지게 만들기 위한 설정 */
+        padding: 1.5rem 1rem 0;
+    }
+    .info__text h1{
+        /* 작아졌을때 행간격 너무 커서 줄임 */
+        line-height: 2rem;
+        font-size: 1.5rem;
+    }
+    .info__text p{
+        display: none;
+    }
+}
+
+
+/* 노티스 */
+.notice{
+    max-width: 48rem; /* 기본 width가 정해진 상태에서 그것보다 커질 수 없는 한계값 설정 여백 설정 */
+    margin: auto;
+}
+
+.notice__title{
+    font-size: 1.625rem;
+    margin: 3.75rem 0 2.5rem;
+    line-height: 1.5;
+}
+
+.notice__container{
+    justify-content: space-between;  /* 여백을 사이사이에 배치해서 양끝정렬하는 플렉스 컨테이너 */
+    flex-wrap: wrap; /* 플렉스아이템이 넘쳐서 많아지게 되면 두 줄 이상으로 배치가 되게끔하는 설정 */
+
+}
+
+.notice__item{
+    padding: 1.25rem 0;
+    flex-basis: 48%; /* 플렉스아이템의 초기 크기를 지정하는 옵션 */
+}
+
+.notice__thumb{
+    min-width: 6.75rem; /* 이 수치보다 작아질 수 없다. - thumb이 div 요소로 크기에 맞춰서 가변적으로 바뀔 수 있음 */
+    min-height: 6.75rem;
+    background-color: #be694b;
+}
+.notice__content{
+    margin-left: 1rem;
+}
+
+.notice__content__title{
+    line-height: 1.32;
+    font-size: 1.125rem;
+}
+.notice__content__address{
+    line-height: 1.4;
+    font-size: .875rem;
+    color: #aeaeae;
+}
+.notice__content__pay{
+    font-weight: 700;
+}
+
+
+@media screen and (max-width: 768px) {
+    .notice{
+        padding: 0 1rem 1.25rem;
+    }
+    .notice__title{
+        font-weight: 700;
+        line-height: 1.3;
+        font-size: 1.25rem;
+        margin: 2.5rem 0 1.5rem;
+    }
+    .notice__container{
+        display: block;
+    }
+}
+
+/* 푸터 */
+.footer{
+    color: #515255;
+    border-top: 1px solid #c3c4c7;
+    padding: 0 1rem;
+}
+
+.footer__container{
+    max-width: 48rem;
+    margin: auto;
+}
+
+.footer__menu{
+    padding: 3rem 0;
+}
+
+.footer__apps{
+    float: right;
+}
+
+.footer__appdown{
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.footer_appbtn{
+    width: 18.75rem;
+    justify-content: space-between;
+}
+
+.footer_appbtn button{
+    width: 48%;
+    height: 2.75rem;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;;
+}
+
+.footer__nav ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 33%;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    font-size: 0.875rem;
+}
+
+.footer__nav ul:nth-child(3){
+    margin-right: 15%;
+}
+
+.footer__nav ul li{
+    margin-bottom: 1rem;
+}
+
+
+.footer__info{
+    padding: 1.5rem 0 6.25rem;
+    border-top: 1px solid #c3c4c7;
+    color: #868b94;
+    line-height: 1.5;
+    font-size: .813rem;
+}
+
+@media screen and (max-width: 768px) {
+    .footer__apps{
+        float: none;
+        display: flex;
+        margin-bottom: 1.25rem;
+    }
+    .footer__appbtn{
+        display: none;
+    }
+
+}
