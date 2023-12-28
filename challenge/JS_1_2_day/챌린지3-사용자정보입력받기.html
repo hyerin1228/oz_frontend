@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지3-사용자정보입력받기</title>
+    <style>
+        h2{
+            display: inline-block;
+        }        
+    </style>
+</head>
+<body>
+    
+    <div>
+        <h2>이름:</h2><label class="name"></label>
+    </div>
+    <div>
+        <h2>취미:</h2>
+        <label class="hobby"></label>
+    </div>
+    <div>
+        <h2>좋아하는 가수:</h2>
+        <label class="music"></label>
+    </div>
+    <script>
+        let name =  document.querySelector(".name")
+        let hobby =  document.querySelector(".hobby")
+        let music =  document.querySelector(".music")
+
+        name.textContent = window.prompt("당신의 이름은?")
+        hobby.textContent = window.prompt("당신의 취미는?")
+        hobby.style.color = window.prompt("좋아하는 색깔은?(영어로 - red, yellow, blue ...)")
+        music.textContent = ` 좋아하는 곡은 ` + window.prompt("좋아하는 가수는?") + ` 입니다!`
+
+    </script>
+</body>
+</html>

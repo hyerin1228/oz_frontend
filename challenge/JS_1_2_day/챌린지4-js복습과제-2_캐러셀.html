@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지4-js복습과제-2_캐러셀</title>
+    <style>
+        div{
+            box-sizing: border-box;
+        }
+
+        .flex{
+            display: flex;
+        }
+        .carousel_slider__inner img{
+            width: 350px;
+            height: 200px;
+        }
+
+        .carousel_slider__outer{
+            width: 350px;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .carousel_slider__inner{
+            transform: translate3d(0px, 0px, 0px); /* -700 -350 0  */
+            transition: transform 0.5s;
+         }
+
+    </style>
+</head>
+<body>
+    <div class="carousel_slider__outer">
+        <div class="carousel_slider__inner flex">
+            <img class="img__1" src="images/다운로드 (1).gif">
+            <img class="img__2" src="images/다운로드 (2).gif">
+            <img class="img__3" src="images/다운로드 (3).gif">
+        </div>
+    </div>
+    
+
+    <button id="blackAndWhite" onclick="backgroundMode(this);">@</button>
+    <button btn_data="0" onclick="clickBtn(this);">화</button>
+    <button btn_data="-350" onclick="clickBtn(this);">이</button>
+    <button btn_data="-750" onclick="clickBtn(this);">팅</button>
+    <button id="blackAndWhite" onclick="nextBtn(this);">다음</button>
+
+    <script>
+        // 화(1), 이(2), 팅(3) 
+        // 3번 사진에서 다음 페이지가 없으면 1로 돌아감
+        // 다음 : 1번 -> 2번 -350px, 2번 -> 3번 -700px , 3번에서는 다음이 없으니 1번으로 돌아감 0px
+    
+        // @ , 버튼을 누를때마다 전환(?)
+        function backgroundMode(e){
+            let bgColor = document.body.style.background;
+            console.log(bgColor);
+            if(bgColor == "" || bgColor == "white"){
+                document.body.style.background = "black";
+            }
+            else{
+                document.body.style.background = "white";
+            }
+        }
+
+        function clickBtn(e){
+            let btnTransformZ = e.getAttribute('btn_data');
+
+            console.log(btnTransformZ)
+            // transform 적용할 요소 가져오기
+
+            let container = document.querySelector('.carousel_slider__inner')
+            container.style.transform = "translate3d(" + btnTransformZ +"px, 0px, 0px)"
+        }
+
+        function nextBtn(e) {
+            // transform 적용할 요소 가져오기
+            let imgContainer = document.querySelector('.carousel_slider__inner');
+
+            // 초기값 translate3d(0px, 0px, 0px)을 설정
+            imgContainer.style.transform = imgContainer.style.transform || "translate3d(0px, 0px, 0px)";
+
+            console.log("imgContainer.style.transform  = " + imgContainer.style.transform )
+
+            // 현재 위치 가져오기
+            let currentZdata = parseInt(imgContainer.style.transform.match(/translate3d\((-?\d+)/)[1]);
+
+            console.log("currentZdata = " + currentZdata)
+
+            // 다음 위치 계산
+            let nextPosition = (currentZdata === -700) ? 0 : currentZdata - 350;
+
+            // transform 설정
+            imgContainer.style.transform = `translate3d(${nextPosition}px, 0px, 0px)`;
+        }
+
+
+        
+    </script>
+</body>
+</html>

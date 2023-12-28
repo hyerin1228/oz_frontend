@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지4-js복습과제-1_다크모드</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="background_color">
+        <button id="white" onclick="darkMode(this);">white</button>
+        <button id="black" onclick="darkMode(this);">black</button>
+    </div>
+
+
+    <script>
+
+        function darkMode(e){
+            let attr = e.getAttribute('id')
+            document.body.style.background = attr            
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>챌린지4-js복습과제-3_회원가입 폼에서 양식받기</title>
+        
+        <style>
+
+            body{
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .box {
+                width: 400px;
+                height: 600px;
+                background-color: rgba(255, 255, 255, 1);
+                color: #000;
+                border-radius: 10px;
+                box-shadow: 0px 0px 0px 1px rgba(218,102,123,1),
+                            8px 8px 0px 0px rgb(243, 132, 153),
+                            0px 1px 9px 1px rgba(144,221,206,0.8);
+            }
+
+            
+            /* 숫자 입력 4칸 */
+            input[type=number]{
+                width:  4em;
+            }
+
+            /* input type number 화살표 스핀 제거 */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+
+            form{
+                /* 부모요소의 중앙으로 위치 */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                
+                /* 행간 간격 조절 */
+                line-height: 2.4;
+            }
+
+            input, button, select{
+                height: 30px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- 머릿말 -->
+        <header>
+            <!-- <h1>예제1 - 오즈코딩스쿨 회원가입</h1> -->
+        </header>
+        <!-- 본문 -->
+        <main>
+            <div class="box" id="demoObject">
+                <form id="form">
+                    <h3>예제1 - 오즈코딩스쿨 회원가입</h3>
+                    <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요." size="40"><br>
+                    <input type="text" name="name" id="name" placeholder="이름을 입력해주세요." size="40"><br>
+                    <input type="password" name="password1" id="password1" placeholder="비밀번호를 입력해주세요." size="40"><br>
+                    <input type="password" name="password2" id="password2" placeholder="비밀번호를 다시 입력해주세요." size="40"><br>
+                    <div class="tel">
+                        <input type="number" name="tel1" id="tel1" placeholder="010">-
+                        <input type="number" name="tel2" id="tel2" placeholder="1234">-
+                        <input type="number" name="tel3" id="tel3" placeholder="5678"><br>
+                    </div>
+                    <div class="authnumber" style="text-align: right;">
+                        123456 &nbsp; <input type="button" value="인증번호 전송"><br>
+                        3:00 &nbsp; <input type="button" style="width: 90px;" value="인증확인" disabled><br>
+                    </div>
+
+                    <select name="regions" id="region" style="width: 280px;">
+                        <option>지역을 선택해주세요</option>
+                        <option>서울</option>
+                        <option>경기</option>
+                        <option>대구</option>
+                    </select><br>
+
+                    <div class="gender" style="text-align: center;">
+                        <input type="radio" id="female" name="gender">
+                        <label for="여성">여성</label>
+                        <input type="radio" id="male" name="gender">
+                        <label for="남성">남성</label><br>
+                    </div>
+                    <input type="submit" value="가입하기" style="width: 280px;"> 
+                </form>
+            </div>
+        </main>
+        <hr>
+
+
+        <script>
+            const form = document.getElementById("form")
+
+            form.addEventListener("submit", function(event){
+                event.preventDefault()
+                // const target = event.target
+                for(let i=0; i<event.target.length; i++){
+                    console.log(event.target[i].value)
+                }
+            })
+        </script>
+    </body>
+</html>
