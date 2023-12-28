@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지7 - js 복습과제 - if문</title>
+    <style>
+        td, th{
+
+            border: 1px solid black;
+        }
+        #table{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h1>다음 조건에 맞게 코드를 작성해주세요.</h1>
+    <p>조건 : <br>
+        1. 입력창을 띄워 사용자의 0 ~ 100점의 숫자를 받는다.
+    </p>
+    <p>2. 입력받은 점수에 맞는 성적의 등급을 나눈다.</p>
+    <table id="table">
+        <tr>
+            <td>점수</td>
+            <td>90이상</td>
+            <td>80~89점</td>
+            <td>70~79점</td>
+            <td>60~69점</td>
+            <td>60점 미만</td>
+        </tr>
+        <tr>
+            <td>학점</td>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+            <td>D</td>
+            <td>F2.</td>
+        </tr>
+    </table>
+    <p>나의 기말고사 점수는 ___점, 학점은 ___ !!!</p>
+    <hr>
+
+    <p>예시) 나의 기말고사 점수는 89점, 학점은 B!!!</p>
+    <p id="scoreBox"></p>
+
+
+    <script>
+        // 1. 점수 입력
+        // 2. 점수 입력 후에 2번에 점수표 나온다
+        // 3. 예시에 점수와 학점이 표시된다.
+
+        let score = window.prompt("중간고사 점수를 입력하세요.")
+        let grade = "";
+
+        if(score >= 90){
+            grade = "A"
+        }else if(score >= 80){
+            grade = "B"
+        }else if(score >= 70){
+            grade = "C"
+        }else if(score >= 60){
+            grade = "D"
+        }else{
+            grade = "F2"
+        }
+
+        const scoreBox = document.getElementById("scoreBox")
+        scoreBox.textContent = `나의 기말고사 점수는 ${score}점, 학점은 ${grade} !!! `
+
+        const table = document.getElementById("table")
+        table.style.display = "block"
+        
+
+    </script>
+</body>
+</html>

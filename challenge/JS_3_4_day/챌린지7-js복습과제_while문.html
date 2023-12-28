@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지7 - js 복습과제 - while문</title>
+    <style>
+        p{
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <h1>4의 배수 5개씩 출력하기</h1>
+    <p id="pBox"></p>
+
+    <script>
+        const pBox = document.getElementById("pBox")
+        let pStr = "";
+        let lineCount = 0;
+        
+        let n = 1;
+        while(n <= 500){
+            if(n % 4 == 0){
+                pStr += n + " "
+                lineCount++;
+            }
+
+            if(lineCount % 5 == 0){
+                pStr += "\n"
+            }
+            n++
+        }
+
+        const p = document.createElement("p")
+        p.textContent = pStr
+        pBox.appendChild(p)
+
+
+    </script>
+</body>
+</html>
