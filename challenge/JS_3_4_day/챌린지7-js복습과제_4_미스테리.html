@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지7 - js복습과제 4. 미스테리</title>
+    <style>
+        body{
+            background-color: gray;
+            color: white;
+        }
+        div{
+            box-sizing: border-box;
+        }
+        .flex{
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            align-items: center;
+        }
+        input{
+            display: inline;
+        }
+        .txtContainer{
+            margin: 20px 0;
+        }
+        .submitBtn{
+            background-color: rgba(0,0,0,0);
+            color: white;
+            border-color: chartreuse;
+            border: 1px solid chartreuse;
+            border-radius: 2px;
+        }
+        .reloadBtn{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container flex">
+        <h1>Mystery Number 맞추기</h1>
+        <span>1부터 100사이의 숫자를 입력하세요!</span>
+        <div class="txtContainer">
+            <input class="inputText" type="text">
+            <input class="submitBtn" onclick="btnClick()" type="button" value="뚜둥">
+        </div>
+        <span class="hintTxt"></span>
+        <button class="reloadBtn" onclick="reGame()">다시하기</button>
+    </div>
+
+    <script>
+        /*
+            - 요구사항
+                - Math.floor 메소드 이용하여 양의 정수 받기 - Math.floor() : 소수점 이하를 버림한다.
+                - Math.random 메소드 이용하여 랜덤 숫자 받기 - https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+                - 잘못된 입력값에 대한 힌트 넣어주기
+                */
+               
+               //두 값 사이의 난수 생성하기
+               // 이 예제는 주어진 두 값 사이의 난수를 생성한다. 함수의 반환값은 min보다 크거나 같으며, max보다 작다.
+               const randomNumber = (function(){
+                   return Math.floor(Math.random() * (100 - 1) + 1);
+                })()
+                
+
+                // 1. 버튼을 클릭하면, 입력한 숫자와 임의의 숫자를 비교해서 힌트를 준다.
+                // 2. 입력한 숫자가 더 작으면 -> 힌트 : 숫자가 너무 작아요! 조금만 더 높여보세요
+                // 2. 입력한 숫자가 더 크면 -> 힌트 : 숫자가 커요! 줄여볼까요?!
+                // 2. 입력한 숫자가 똑같으면 -> alert~짝짝짝 맞추셨어요
+                // 3. 다시하기 버튼이 생기고 리셋됨!
+                function btnClick(){
+                    const inputText = document.getElementsByClassName("inputText")
+                    const hintText = document.getElementsByClassName("hintTxt")
+                    const reloadBtn = document.getElementsByClassName("reloadBtn")
+                    
+                    let inputNumber = parseInt(inputText.item(0).value)
+
+                    if(inputNumber < randomNumber){
+                        hintText.item(0).textContent = "숫자가 너무 작아요! 조금만 더 높여보세요"
+                    }else if(inputNumber > randomNumber){
+                        hintText.item(0).textContent = "숫자가 커요! 줄여볼까요?!"
+                    }else{
+                        hintText.item(0).textContent = ""
+                        window.alert("alert~짝짝짝 맞추셨어요")
+                        reloadBtn.item(0).style.display = "block";
+                    }
+                    
+                }
+
+                function reGame(){
+                    location.reload();
+                }
+                
+                </script>
+</body>
+</html>
+
+
+

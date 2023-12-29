@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지8-몬스터잡기게임</title>
+</head>
+<body>
+
+    <script>
+        let monster = 100
+        let damage = parseInt(window.prompt("1회 공격 시 데미지는 얼마인가요? (양의 정수로 입력하세요.)"))
+
+        if(damage < 1){
+            window.alert("데미지를 잘못 입력하여 게임을 취소합니다")
+        }
+
+        document.write("<h1>몬스터 잡기 게임을 시작합니다!</h1>")
+
+        for(let i = 1; monster > 0; i++){
+            
+            console.log("hp:"+monster+" - ["+damage+"]")
+            if(monster > damage){
+                console.log("if문")
+                monster -= damage
+                document.write("몬스터를 " + i + "회 공격했습니다.<br>")
+                document.write("<b>몬스터의 남은 HP는 " + monster + "입니다!</b><br>")
+            }else{
+                console.log("else문")
+                monster = 0
+                document.write("몬스터를 " + i + "회 공격했습니다.<br>")
+                document.write("<b>몬스터의 남은 HP는 0 입니다!</b><br>")
+                document.write("<h1 style='color:red'>몬스터의 잡기 완료! 수고하셨습니다.</h1><br>")
+                break;
+            }
+        }
+    
+    
+    </script>
+
+</body>
+</html>
