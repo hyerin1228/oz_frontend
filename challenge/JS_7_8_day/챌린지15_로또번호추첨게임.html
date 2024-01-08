@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지14_로또번호추첨게임</title>
+</head>
+<body>
+    <div class="container">
+        <div class="lotto">
+            <h3><span class="today"></span>로또 번호 추첨</h3>
+            <div class="numbers"></div>
+            <button id="draw">추첨</button>
+            <button id="reset">다시</button>
+        </div>
+    </div>
+
+    <script>
+        const todaySpan = document. querySelector (".today")
+        const numbersDiv = document. querySelector ('.numbers')
+        const drawButton = document. querySelector ('#draw')
+        const resetButton = document. querySelector ('#reset')
+
+
+
+
+        let lottoNumbers = []
+
+
+        // 날짜 추가, 년월일 정보만 가져오기
+        const today = new Date()
+        let year = today.getFullYear()
+        let month = today.getMonth() + 1
+        let date = today.getDate()
+        todaySpan.textContent = `${year}년 ${month}월 ${date}일 `
+
+        function paintNumber(number){
+            const eachNumDiv = document.createElement("div")
+            eachNumDiv.classList.add("eachnum")
+            eachNumDiv.textContent = number
+            numbersDiv.append(eachNumDiv)
+        }
+
+        // 추첨 버튼을 눌렀을 때, 랜덤한 여섯개의 숫자를 채운다 (1부터 45)
+        drawButton.addEventListener("click", function(){
+
+            if(lottoNumbers.length >= 6){
+                lottoNumbers.splice(0, 6) // 시작 위치, 몇 개를 지울지
+                numbersDiv.innerHTML = ""
+            }
+
+            while(lottoNumbers.length < 6){
+                let rn = Math.floor(Math.random() * 45) + 1
+                
+                // rn이 있을 때는 인덱스 번호를, 없을 때는 -1를 반환
+                if(lottoNumbers.indexOf(rn) === -1){
+                    lottoNumbers.push(rn)
+                    paintNumber(rn)
+                }
+            }
+
+            console.log(lottoNumbers)
+        })
+
+
+        resetButton.addEventListener("click", function(){
+            lottoNumbers.splice(0, 6) // 시작 위치, 몇 개를 지울지
+            numbersDiv.innerHTML = ""
+        })
+
+    </script>
+</body>
+</html>

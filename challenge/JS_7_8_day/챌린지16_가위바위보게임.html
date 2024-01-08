@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지15_로또번호추첨게임</title>
+
+    <style>
+        .flex{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .display{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>가위바위보 게임</h1>
+            <span>가위, 바위 보 중 하나를 입력하세요:</span>
+        </div>
+        <div class="container__input">
+            <input type="text" id="userInputText">
+            <input type="button" id="resultBtn" value="결과 확인">
+        </div>
+
+        <div class="container__display flex">
+            <div class="display">
+                <div class="usertBox">
+                    <div class="display__img">@ 당신의 선택 : </div>
+                    <div class="display__user"></div>
+                </div>
+                <div class="computerBox">
+                    <div class="display__img">@ 컴퓨터의 선택 : </div>
+                    <div class="display__computer"></div>
+                </div>
+            </div>
+            <div class="resultBox">결과:</div>
+        </div>
+    </div>
+
+
+    <script>
+        // 가위 바위 보
+        // 경우의 수
+        /*
+            유저   - 컴퓨터
+            1)가위 - 가위 = 무승부
+              가위 - 바위 = 패배
+              가위 - 보 = 승리
+            2)바위 - 바위 = 무승부
+              바위 - 보 = 패배
+              바위 - 가위 = 승리
+            3)보 - 보 = 무승부
+              보 - 가위 = 패배
+              보 - 바위 = 승리
+            가위 : 1, 바위 : 2, 보 : 3, 내가 낸 것 : x, 상대가 낸 것 : y 이면, (x % 3) + 1 == y 일 때 나는 진다.
+
+        */
+       // 내가 선택한 거랑 컴퓨터가 선택(랜덤)한 거랑 비교해서 결과 보여주기
+       
+        const userInputText = document.getElementById("userInputText")
+        const resultBtn = document.getElementById("resultBtn")
+        const resultBox = document.querySelector(".resultBox")
+        const userDisplay = document.querySelector(".display__user")
+        const computerDisplay = document.querySelector(".display__computer")
+
+        function stringToNumber(randomNumber){
+            let machingString = (randomNumber === 1) ? "가위" 
+                : (randomNumber === 2) ? "바위" 
+                : (randomNumber === 3) ? "보" 
+                : "Invalid Input"
+
+            return machingString;
+        }
+
+        // 1. 결과 확인 버튼을 클릭하면 유저가 입력한 문자가 출력
+        resultBtn.addEventListener("click", function(){
+
+            if(resultBox.textContent !== ""){
+                resultBox.textContent = ""
+            }
+            if(userDisplay.textContent !== ""){
+                userDisplay.textContent = ""
+            }
+            if(computerDisplay.textContent !== ""){
+                computerDisplay.textContent = ""
+            }
+            
+
+            const userSelect = userInputText.value
+            const userSelectNumber = (userSelect === "가위") ? 1 
+                : (userSelect === "바위") ? 2
+                : (userSelect === "보") ? 3
+                : "";
+
+            let randomNumber = Math.floor((Math.random()*3)+1)
+            
+            // 2. 컴퓨터가 선택한 건 어떻게 만들어야되나?
+            // 일단 math 함수 이용해서, 1)가위 2)바위 3)보 이렇게 할 수도 있을듯.
+            const computerSelect = stringToNumber(randomNumber);
+
+            userDisplay.textContent += userSelect
+            computerDisplay.textContent += computerSelect
+
+            // 3. 유저 선택한 거랑 컴퓨터가 선택한 거 비교하기
+            if(userSelectNumber === randomNumber ){
+                resultBox.textContent += "무승부입니다."
+            }else if((userSelectNumber%3)+1 == randomNumber ){
+                resultBox.textContent += "패배입니다."
+            }else{
+                resultBox.textContent += "승리!!.."
+            }
+
+        })
+        
+    
+        
+
+    </script>
+</body>
+</html>
