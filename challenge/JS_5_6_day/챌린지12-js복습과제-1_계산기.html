@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지12-js복습과제-1_계산기</title>
+
+    <style>
+        
+        .container{
+            display: flex;
+            height: 100vh;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container__flex{
+            width: 150px;
+            padding: 5px 0 5px 0;
+            border: 1px solid black;
+            background-color: lightsteelblue;
+        }
+
+        .container__display{
+            text-align: center;
+
+        }
+
+        .container__btn{
+            text-align: center;
+        }
+
+        button{
+            border: 0;
+            width: 30px;
+        }
+
+        #display{
+            text-align: right;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="container__flex">
+            <div class="container__display">
+                <input type="text" id="display">
+            </div>
+            <div class="container__btn">
+                <div class="container__btn__line1">
+                    <button class="number">7</button>
+                    <button class="number">8</button>
+                    <button class="number">9</button>
+                    <button class="number">*</button>
+                </div>
+                <div class="container__btn__line2">
+                    <button class="number">4</button>
+                    <button class="number">5</button>
+                    <button class="number">6</button>
+                    <button class="number">/</button>
+                </div>
+                <div class="container__btn__line3">
+                    <button class="number">1</button>
+                    <button class="number">2</button>
+                    <button class="number">3</button>
+                    <button class="number">-</button>
+                </div>
+                <div class="container__btn__line4">
+                    <button id="reset">C</button>
+                    <button class="number">0</button>
+                    <button class="number">+</button>
+                    <button id="equal">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // 버튼을 누르면 해당하는 숫자 및 수식이 위에 표시됨
+        // C는 리셋, =는 계산한 결과가 화면에 나옴
+
+        // C, = 제외한 버튼을 누르면 위에 표시되게
+        /*
+            사칙연산 https://namu.wiki/w/%EC%82%AC%EC%B9%99%EC%97%B0%EC%82%B0
+            1. 괄호 안을 먼저 계산한다. 단, 괄호 안의 괄호가 반복된다면 가장 안쪽 괄호부터 계산한다. 괄호 안의 계산을 완료하면, 다음 단계 괄호(바로 바깥 괄호) 안 또는 괄호 밖 계산을 우선순위 적용을 반복하면서 계산한다.(따라서 가장 안쪽 괄호 계산을 완료하면 다시 우선순위 1부터 시작한다.[4][5])
+            2. 지수를 다음으로 계산한다. (단 지수 연산이 곤란하다면[6] 무시할 수 있음)[7][8]
+            3. 곱셈과 나눗셈을 계산한다(단, 0으로는 나눌 수 없다).
+            4. 마지막으로 덧셈과 뺄셈을 계산한다.[9]예:10+7x2는 34가 아니라 24이다.
+            5. 만약 함수가 있다면, 덧셈과 뺄셈을 마치고 계산한다.
+            6. 만약 동순위 연산이 2개 이상이면, 계산은 왼쪽에서 오른쪽 순서대로 한다.[10]
+        */
+
+        // 1. 버튼을 누르면 디스플레이에 표시되게 함
+        const display = document.getElementById("display")
+        const btnArr = document.querySelectorAll(".number")
+        const resetBtn = document.getElementById("reset")
+        const equalBtn = document.getElementById("equal");
+
+        [].forEach.call(btnArr, function(arr){
+            arr.addEventListener("click", click, false);
+        });
+
+
+        function click(e){
+            const display = document.getElementById("display")
+            let btnString = e.target.outerText
+            console.log(btnString)
+
+            display.value += btnString
+        }
+
+        // 2. C 버튼을 누르면 리셋이 되어야한당
+        resetBtn.onclick = function(){
+            display.value = ""
+        }
+
+        // 3. = 버튼 누르면 계산 결과가 나와야 한다.
+        equalBtn.onclick = function(){
+            console.log("display.value = " + display.value)
+            let calNumber = eval(display.value)
+            console.log("calNumber = " + calNumber)
+            display.value = calNumber
+        }
+
+
+
+    </script>
+
+</body>
+</html>

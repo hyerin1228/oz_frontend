@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ㅏㅐ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지12-js복습과제-2_구구단만들기</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>구구단 표</h1>
+        <h3>2단~9단을 만들어 보세요!</h3>
+    </div>
+
+
+    <script>
+        const container = document.querySelector(".container")
+        // 2단--- 3단----
+        
+        // 2부터 9단까지 하나씩 증가하는 반복문 안에 1부터 9까지의 수 반복
+        const gugudanDiv = document.createElement("div")
+        for(let i=2; i<=9; i++){
+            //gugudanDiv.textContent += `${i}단`
+            gugudanDiv.innerHTML += i + "단" + "<br>"
+            
+            for(let j=1; j<=9; j++){
+                // gugudanDiv.textContent += `${i} * ${j} = ${i*j}`
+                gugudanDiv.innerHTML += `${i} x ${j} = ${i*j}` + "<br>"
+            }
+        }
+        container.appendChild(gugudanDiv)
+
+
+    </script>
+</body>
+</html>

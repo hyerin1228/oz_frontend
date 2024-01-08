@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지11-회원가입폼만들기</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color: silver;
+            margin: 0; /* body의 기본 margin 제거 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 화면의 100% 높이를 차지 */
+        }
+        .container{
+            padding: 10px 0 10px 0;
+            width: 500px;
+            background-color: white;
+            line-height: 25px;
+        }
+
+        label{
+            display: inline-block;
+            width: 50%;
+            text-align: right;
+            padding-right: 10px;
+        }
+        
+        textarea{
+            height: 70px;
+        }
+
+        .divbtn{
+            text-align: center;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="form" id="form">
+            <div>
+                <label>아이디</label>
+                <input type="text" name="userId" id="">
+            </div>
+            <div>
+                <label>비밀번호</label>
+                <input type="password" name="userPw" id="">
+            </div>
+            <div>
+                <label>비밀번호 확인</label>
+                <input type="password" name="userPw2" id="">
+            </div>
+            <div>
+                <label>이름</label>
+                <input type="text" name="userName" id="">
+            </div>
+            <div>
+                <label>전화번호</label>
+                <input type="tel" name="userPhone" id="">
+            </div>
+            <div>
+                <label>원하는직무</label>
+                <select name="userPosition">
+                    <option>미정</option>
+                    <option>프론트엔드</option>
+                </select>
+            </div>
+            <div>
+                <label>성별</label>
+                <input type="radio" name="userGender" id="" value="남자"/>남자
+                <input type="radio" name="userGender" id="" value="여자"/>여자
+            </div>
+            <div>
+                <label>이메일</label>
+                <input type="email" name="userEmail" id="">
+            </div>
+            <div>
+                <label>자기소개</label>
+                <textarea name="userContent">s</textarea>
+            </div>
+            <div class="divbtn">
+                <input type="submit" name="submit" value="가입">
+                <input type="reset" name="reset" value="리셋">
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+
+        const form = document.getElementById("form")
+
+        form.addEventListener("submit", function(){
+            event.preventDefault() //기존 기능 차단
+
+            // 유저아이디
+
+            function FormData(name, value){
+                this.name = name
+                this.value = value
+            }
+
+            let inputArr = []
+
+            for(let i=0; i<event.target.length; i++){
+                let data = new FormData(event.target[i].name, event.target[i].value)
+                inputArr.push(data)
+            }
+
+            console.dir(inputArr)
+            document.write("<h1>" + inputArr[0].value + "님 환영합니다.</h1><br>")
+            document.write("<h3> 아이디: " + inputArr[3].value + "<br>")
+            document.write("<h3> 이름: " + inputArr[3].value + "<br>")
+            document.write("<h3> 전화번호: " + inputArr[4].value + "<br>")
+            document.write("<h3> 원하는 직무: " + inputArr[5].value + "<br>")
+        })
+
+
+    </script>
+</body>
+</html>

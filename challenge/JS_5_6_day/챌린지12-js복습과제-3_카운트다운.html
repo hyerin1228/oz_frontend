@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지12-js복습과제-3_타이머</title>
+</head>
+<body>
+    <div class="container"></div>
+    <div class="container__timer"></div>
+
+
+    <script>
+        // 요구사항 : 실시간 시간과 날짜
+        // “23년 12월31일 23시 59분 59초 999밀리초 - 현재 날짜”를 하여 남은 시간을 계산해보세요.
+        
+        
+        let timerId
+        timerId = setInterval(function(){
+            let today = new Date()
+            let endyear = new Date("December 31, 2024 23:59:59")
+    
+            const todayDiv = document.querySelector(".container")
+            const remainingDiv = document.querySelector(".container__timer")
+            todayDiv.innerHTML = `<h1> 현재 날짜와 시간 : ${today} </h1>`
+            const milliSeconds = endyear.getTime() - today.getTime()
+            const diffSec = Math.floor((milliSeconds / 1000) % 60);
+            const diffMin = Math.floor((milliSeconds / (1000 * 60 )) % 60 );
+            const diffHour = Math.floor((milliSeconds / (1000 * 60 *60 )) % 24 );
+            const diffDate = Math.floor(milliSeconds / (1000 * 60 * 60 * 24)); // 일
+            // 올해의 남은 시간: 일 시 분 초 남았습니다.
+    
+            
+            remainingDiv.textContent = `올해의 남은 시간 : ${diffDate}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초 남았습니다.`
+
+        }, 1000)
+
+
+    </script>
+
+    
+</body>
+</html>
