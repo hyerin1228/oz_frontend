@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지16_2_이미지멈춰</title>
+    <style>
+        .display{
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="display" style="background-image: url(/JS_7_8_day/images/n02100583_9960.jpg);">
+        </div>
+        <button class="stopBtn">멈춰</button>
+    </div>
+
+
+    <script>
+        // 이미지 세 장이 순차적으로 바뀌다가 버튼을 누르면 멈춘다
+        // 예를 들어 0.5초마다 바뀐다고 했을 때..
+        // 1. 이미지 정보가 담긴 배열을 만든다.
+        // 2. 배열을 순차적으로 읽어올 때 배경 정보도 함께 바뀐다.
+        // 3. n초 마다 이 함수가 실행된다.
+
+        const displayDiv = document.querySelector(".display");
+        const stopBtn = document.querySelector(".stopBtn");
+        let imgArr = [
+            "/JS_7_8_day/images/n02100583_9960.jpg",
+            "/JS_7_8_day/images/n02107312_3474.jpg",
+            "/JS_7_8_day/images/n02109525_7336.jpg",
+        ];
+
+        let intervalID;
+        let timeoutIDs = []; // Change to an array to store multiple timeout IDs
+
+        changeLoop();
+
+        stopBtn.addEventListener("click", function () {
+            console.log("intervalID = " + intervalID);
+            console.log("timeoutIDs = ", timeoutIDs);
+
+            clearInterval(intervalID);
+
+            // Clear all stored timeouts
+            timeoutIDs.forEach((id) => clearTimeout(id));
+        });
+
+        // 반복되는 사이클과 시간 간격 주기
+        function changeLoop() {
+            intervalID = setInterval(function () {
+                timeoutIDs = []; // Reset the array for each iteration
+                imgArr.forEach((item, i) => {
+                    let timeoutID = setTimeout(() => {
+                        backgroundChange(item); }, i * 600);
+                    timeoutIDs.push(timeoutID); // Store the timeout ID in the array
+                });
+                    console.dir(timeoutIDs);
+            }, 1000);
+        }
+
+        // 사진의 딜레이를 주는 것
+        function backgroundChange(item) {
+        // console.log("item =" + item)
+        displayDiv.style.backgroundRepeat = "no-repeat";
+        displayDiv.style.backgroundImage = "url('" + item + "')";
+        // console.log(displayDiv.style.backgroundImage)
+        }
+
+
+    </script>
+</body>
+</html>

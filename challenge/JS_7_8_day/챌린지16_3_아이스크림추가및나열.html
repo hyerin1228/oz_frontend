@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챌린지16_3_아이스크림 추가 및 나열</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="container__btn">
+            <button class="add">아이스크림 종류 추가</button>
+            <button class="read">아이스크림 이름 출력</button>
+            <button class="list">입력한 아이스크림 목록 출력</button>
+        </div>
+        <div class="content">
+            <h1>입력한 아이스크림 목록:</h1>
+        </div>
+    </div>
+    <script>
+
+        // 입력한 아이스크림을 배열에 저장하고 그 리스트를 출력!
+
+        // 아이스크림 종류 추가 : prompt 창에 입력.. 추가하고 싶은 행성의 이름을 입력해 주세요/...??
+        // 아이스크림 이름 출력 : 내가 추가했던 아이스크림의 목록 중 하나씩 alert 창으로 표시됨
+        // 입력한 아이스크림 목록 출력 : 입력한 아이스크림 목록 다음에 주루룩 표시되게 끔..
+        
+        const addBtn = document.querySelector(".add")
+        const readBtn = document.querySelector(".read")
+        const listBtn = document.querySelector(".list")
+        const content = document.querySelector(".content")
+
+        let iceArr = []
+
+        // 1. 아이스크림 추가 버튼
+        addBtn.addEventListener("click", function(){
+            console.log("1. 아이스크림 추가 버튼")
+            iceArr.push(prompt("추가하고 싶은 행성의 이름을 입력해 주세요."))
+            console.log(iceArr)
+        })
+
+        // 2. 아이스크림 이름 출력 버튼
+        readBtn.addEventListener("click", function(){
+            console.log("2. 아이스크림 이름 출력 버튼")
+            iceArr.forEach(item => {
+                alert(item)
+            })
+        })
+
+        // 3. 입력한 아이스크림 목록 출력
+        listBtn.addEventListener("click", function(){
+            console.log("3. 입력한 아이스크림 목록 출력")
+            const span = document.createElement("span")
+            span.textContent = iceArr
+            content.appendChild(span)
+            
+        })
+
+    </script>
+</body>
+</html>
