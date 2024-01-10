@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할일 목록</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app">
+            <h1>TO DO LIST</h1>
+            <ul id="todo-list"></ul>
+            <form id="todo-form">
+                <input type="text" name="todo" placeholder="TO DO..." autocomplete="off">
+                <input type="submit" value="추가">
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // 요소 선택 및 배열 선언
+        const todoList = document.getElementById('todo-list')
+        const todoForm = document.getElementById('todo-form')
+        let todoArr = []
+
+
+        // 할 일 추가하기, 할일 보여주기(할일이 추가되면 화면에 표시), 할일 수정하기(했냐 안 했냐에 따라서 상태가 달라지는 거), 할일 삭제하기
+
+
+        // 할 일 삭제하기
+        function handleTodoDelBtnClick(clickedId){
+            // filter 사용, 클릭된 요소를 제외한 나머지를 남긴다. true에 해당하는 요소를 모아 반환
+            todoArr = todoArr.filter(function(aTodo){
+                return aTodo.todoId !== clickedId 
+            })
+            displayTodos()
+            saveTodos()
+        }
+
+
+        // 로컬 저장소에 저장하기
+        function saveTodos(){
+            const todoString = JSON.stringify(todoArr)
+            localStorage.setItem("myTodos", todoString)
+        }
+
+
+        // 로컬 저장소에서 가져오기
+        function loadTodos(){
+            const myTodos = localStorage.getItem("myTodos")
+            if(myTodos !== null){
+                todoArr = JSON.parse(myTodos)
+                displayTodos()
+            }
+        }
+        loadTodos()
+
+        // 할 일 수정하기
+        // 어떤 할 일을 클릭했을때 그 할일의 아이디를 받아서 아이디에 해당하는 할일만 수정하는 식으로
+        function handleTodoItemClick(clickedId){
+            todoArr = todoArr.map(function(aTodo){
+                if(aTodo.todoId === clickedId){
+                    return{
+                        ...aTodo, todoDone: !aTodo.todoDone
+                    }
+                }else{
+                    return aTodo
+                }
+            })
+            displayTodos()
+            saveTodos()
+        }
+
+
+        // 할 일 보여주기
+        function displayTodos(){
+            todoList.innerHTML = ""
+            todoArr.forEach(function(aTodo){
+                const todoItem = document.createElement('li')
+                const todoDelBtn = document.createElement('span')
+                todoDelBtn.textContent = 'x'
+                todoItem.textContent = aTodo.todoText
+                todoItem.title = "클릭하면 완료됨"
+                if(aTodo.todoDone){
+                    todoItem.classList.add("done")
+                }else{
+                    todoItem.classList.add("yet")
+                }
+                todoDelBtn.title = "클릭하면 삭제됨"
+
+
+                
+                todoItem.addEventListener("click", function(){
+                    handleTodoItemClick(aTodo.todoId)
+                })
+                
+                todoDelBtn.addEventListener("click", function(){
+                    handleTodoDelBtnClick(aTodo.todoId)
+                })
+                
+                todoItem.appendChild(todoDelBtn)
+                todoList.appendChild(todoItem)
+            })
+        }
+
+
+        //할일 추가하기
+        todoForm.addEventListener("submit", function(e){
+            e.preventDefault() // 새로고침되는 기존 기능 차단
+
+            // 할일 배열을 만듦
+            const toBeAdded = {
+                todoText: todoForm.todo.value,
+                todoId: new Date().getTime(),
+                todoDone: false
+            }
+
+            todoForm.todo.value = ""
+            todoArr.push(toBeAdded)
+            displayTodos()
+            saveTodos()
+
+        })
+
+
+    </script>
+</body>
+</html>
