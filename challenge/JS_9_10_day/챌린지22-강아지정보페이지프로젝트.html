@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견종 정보 페이지</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        html, body{
+            margin: 0;
+        }
+        #container{
+            width: 100%; 
+            max-width: 640px;
+            margin: auto;
+        }
+        header{
+            width: 100%; 
+            max-width: 640px;
+            height: 60px;
+            border-bottom: 1px solid #00000033; 
+            background-color:#FFFFFF;
+            display: flex; 
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            top: 0;
+        }
+        .header_search{
+            display: flex;
+            align-items: center;
+        }
+        input, button, select{
+            height: 30px;
+            border: 0.5px solid gray;
+        }
+        main{
+            display: flex;
+            justify-content: space-evenly; 
+            flex-wrap: wrap; 
+            margin-top: 60px;
+        }
+        img{
+            width: 200px; 
+            height: 200px;
+        }
+
+
+        .more, .tothetop{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            position: fixed; 
+            cursor: pointer;
+        }
+
+        .more{
+            color: #FFFFFF;
+            background-color: #cd8f6b;
+            left: 100px; 
+            bottom: 100px;
+        }
+                
+                
+        .tothetop{
+            color: #FFFFFF; 
+            background-color: #AB4A12;
+            right: 100px; 
+            bottom: 100px;
+        
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <header class="header" id="header">
+            <div class="header__search">
+                <input id="filter-text">
+                <button id="filter-button">필터링</button>
+            </div>
+            <select id="filter-select">
+                <option value="">all</option>
+            </select>
+            <button id="reset-button">reset</button>
+        </header>
+
+        <main class="main" id="main">
+            <div class="more" id="more">MORE</div>
+            <div class="tothetop" id="tothetop">TOP</div>
+        </main>
+    </div>
+
+    <script>
+        // https://dog.ceo/api/breeds/image/random/3
+        // https://dog.ceo/api/breeds/list/all
+
+        const apiRandomDogs = "https://dog.ceo/api/breeds/image/random/42"
+        const apiAllbreeds = "https://dog.ceo/api/breeds/list/all"
+        // const request1 = new XMLHttpRequest()
+        const request2 = new XMLHttpRequest()
+
+        const header = document.getElementById("header")
+        const main = document.getElementById("main" )
+        const input = document.getElementById("filter-text")
+        const button = document.getElementById("filter-button" )
+        const select = document.getElementById("filter-select" )
+        const more = document.getElementById("more" )
+        const tothetop = document.getElementById("tothetop" )
+        const resetButton = document.getElementById("reset-button" )
+
+        let currentDogs = []
+
+        function displayDogs(item){
+            const dogImgDiv = document.createElement("div")
+            dogImgDiv.classList.add("flex-item")
+            dogImgDiv.innerHTML = `
+                <img src=${item}>
+            `
+            main.appendChild(dogImgDiv)
+        }
+
+        // 페이지가 화면에 펼쳐지면
+        // 1. 강아지 사진을 가져온다 2. 견종의 목록을 가져온다.
+
+        window.addEventListener("load", function(){
+            
+            // 강아지 사진 뿌리기
+            dogImgRequest()
+            // 셀렉트에 견종 정보 뿌리기
+            request2.open("get", apiAllbreeds)
+            request2.addEventListener("load", function(){
+                const response = JSON.parse(request2.response)
+                // console.log(response.message)                   // 견종 정보가 키로 되어있다.
+                // console.log(Object.keys(response.message))         // 객체의 키 값만 모아서 배열을 반환해준다.
+                Object.keys(response.message).forEach(function(item){
+                    const option = document.createElement("option")
+                    option.textContent = item
+                    option.value = item
+                    select.appendChild(option)
+                })
+            })
+            request2.send()
+        })
+
+        // 필터링 버튼을 누르면 써져있는 내용을 토대로 필터링 됏으면 좋겠다.
+        // select 버튼의 목록을 토대로 해당하는 견종이 필터링 되었으면 좋겠다.
+
+        button.addEventListener("click", function(){
+            main.innerHTML = ""
+            let filteredDogs = currentDogs.filter(function(item){
+                return item.indexOf(input.value) !== -1           // 문자열메소드, 문자열 안에 주어진 문자열이 포함하면 인덱스 번호 반환, 아니면 -1 반환
+            })
+
+            input.value = ""
+
+            filteredDogs.forEach(function(item){
+                displayDogs(item)
+            })
+
+        })
+
+        select.addEventListener("change", function(){
+            main.innerHTML = ""
+            let filteredDogs = currentDogs.filter(function(item){
+                return item.indexOf(select.value) !== -1           // 문자열메소드, 문자열 안에 주어진 문자열이 포함하면 인덱스 번호 반환, 아니면 -1 반환
+            })
+
+            input.value = ""
+
+            filteredDogs.forEach(function(item){
+                currentDogs.push(item)
+                displayDogs(item)
+            })
+        })
+
+        more.addEventListener("click", function(){
+            request1.open("get", apiRandomDogs)
+
+            request1.addEventListener("load", function(){
+                const response = JSON.parse(request1.response)
+                response.message.forEach(function(item){
+                    currentDogs.push(item)
+                    displayDogs(item)
+                })
+            })
+
+            request1.send()
+        })
+
+
+        tothetop.addEventListener("click", function(){
+            // 스크롤의 정보를 윈도우 객체, 웹브라우저가 가지고 있음
+            window.scrollTo({ top: 0 }) // 주어진 위치로 스크롤을 이동한다.
+        })
+
+
+        //리셋 버튼 이벤트
+        resetButton.addEventListener("click", function(){
+            currentDogs = []
+            main.innerHTML = ""
+
+            dogImgRequest()
+            // console.log(currentDogs)
+        })
+
+        // request1이 전역변수로 되어있으니 요청 메시지가 쌓이고 있었다. 그래서 지역변수로...
+        function dogImgRequest(){
+            const request1 = new XMLHttpRequest()
+
+            request1.open("get", apiRandomDogs)                 // 강아지 사진 뿌리기
+            request1.addEventListener("load", function(){       // 응답이 로드 됐을 때,
+                const response = JSON.parse(request1.response)  // 객체의 응답을 읽어온다. 메시지와 status를 포함한 정보, 배열정보임
+                console.log("request--------")
+                console.log(response.message)                // 배열의 멤버하나가 이미지 소스, 각각 하나씩 뿌려주는 처리 해야됨.
+                console.log("request--------")
+                response.message.forEach(function(item){        // 모든 요소를 한 번씩 받아서 처리
+                    currentDogs.push(item)
+                    displayDogs(item)
+                })
+            })
+            request1.send()
+        }
+
+        /*
+
+            6회차 프로젝트 과제!
+            - 견종 고르는 셀렉트 옆에다 버튼(button)을 하나 추가한다
+            - 버튼에는리셋'이라고 쓴다
+            - 해당 버튼을 누르면 강아지 42마리의 소스를 새롭게 요청해 받아온다
+            - 기존에 뿌려져 있던 강아지는 모두 사라지고, 새로운 강아지 42마리로 채워진다
+
+        */
+    </script>
+</body>
+</html>
