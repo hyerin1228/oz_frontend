@@ -198,6 +198,8 @@
         element.addEventListener("click", dateBtnClick, false);
       });
 
+      // let intervalID = setInterval(dateHandler, 1000)
+
 
       // 달력을 클릭하면 상세 일자를 지정할 팝업이 나온다.
       // 달력 클릭하면 계산된 날짜가 사진 밑에 나와야됨
@@ -217,6 +219,7 @@
           <div class="date__popup__content__display">날짜가 표시될 곳</div>
           <div class="date__popup__content__input">
             <input type="date" onchange='dateHandler(event);' />
+            <button class="closeBtn" onclick='closeBtnClick(event);'>닫기</button>
           </div>
           
           </div>`;
@@ -230,8 +233,8 @@
 
       function dateHandler(e){
         // console.log(e.target.parentElement.parentElement.parentElement.parentElement.parentElement) // 어떻게 해서 나오긴 나오는데 이게 맞나..?.....
-        const targetDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
-        targetDiv.textContent = e.target.value
+        // const targetDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+        // targetDiv.textContent = e.target.value
 
         // 현재 날짜와 지정한 날짜를 비교한다.
         // 현재 날짜 정보 가져오기
@@ -249,33 +252,40 @@
           1시간 = 60분 (60 * 60 * 1,000 = 3,600,000 밀리초)
           1일 = 24시간 (24 * 60 * 60 * 1,000) // 86,400,000
         */
-        const now = new Date()
+
+        console.log(e)
+        console.dir(e)
+        const targetDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+
         const targetDate = new Date(e.target.value)
-        console.log("targetDate = " + targetDate)
-
-        let targetDays = 0
-        let targetHour = 0
-        let targetMin = 0
-        let targetSec = 0
-        let leftTime = targetDate.getTime() - now.getTime()
-
-        console.log("[" + targetDate.getTime()+"] - " + - + "["+now.getTime()+"] = " + leftTime)
-
-        let days1 = 24 * 60 * 60 * 1000
-        let hour1 = 60 * 60 * 1000
-        let min1 = 60 * 1000
-        let sec1 = 1000
-
-        // 일, 시 , 분, 초 단위로 뺀다.
-
-        // nowTime 이 1초 미만일 때까지(?) 돌리나?...
-
+        
+        let intervalID = setInterval(function(){
+          const now = new Date()
+          console.log("targetDate = " + targetDate)
+  
+          let targetDays = 0
+          let targetHour = 0
+          let targetMin = 0
+          let targetSec = 0
+          let leftTime = targetDate.getTime() - now.getTime()
+  
+          console.log("[" + targetDate.getTime()+"] - " + - + "["+now.getTime()+"] = " + leftTime)
+  
+          let days1 = 24 * 60 * 60 * 1000
+          let hour1 = 60 * 60 * 1000
+          let min1 = 60 * 1000
+          let sec1 = 1000
+  
+          // 일, 시 , 분, 초 단위로 뺀다.
+  
+          // nowTime 이 1초 미만일 때까지(?) 돌리나?...
+  
           if( (leftTime / days1 ) > 1){ // 남은 시간을 하루로 나누어서 나누어 떨어지면 하루는 있는거니까..
             // 그 일수를 넣고, 그 일수만큼 또 연산해서 빼나?
             targetDays = Math.floor(leftTime / days1) //Math.floor 를 사용하지 않을 시 이상한 값이 나옴... 계산이 되지 않는다.
             console.log("targetDays * days1 = " + targetDays * days1)
             leftTime -= (targetDays * days1)
-
+  
             console.log("targetDay 남은 일수 = " + targetDays)
             console.log("빼고 남은 시간 = " + leftTime)
           }
@@ -284,28 +294,46 @@
             targetHour = Math.floor(leftTime / hour1)
             console.log(targetHour * hour1)
             leftTime -= targetHour * hour1
-
+  
             console.log("targetDay 남은 시간 = " + targetHour)
             console.log("빼고 남은 시간 = " + leftTime)
           }
-
+  
           if( (leftTime / min1 ) > 1){
             targetMin = Math.floor(leftTime / min1)
             console.log(targetMin * min1)
             leftTime -= targetMin * min1
-
+  
             console.log("targetMin 남은 분 = " + targetMin)
             console.log("빼고 남은 밀리초 = " + leftTime)
           }
-
+  
           if( (leftTime / sec1 ) > 1){
             targetSec = Math.floor(leftTime / sec1)
             console.log(targetSec * sec1)
             leftTime -= targetSec * sec1
-
+  
             console.log("targetMin 남은 초 = " + targetSec)
             console.log("빼고 남은 밀리초 = " + leftTime)
           }
+  
+         
+          targetDiv.textContent = `
+            남은 시간 : ${targetDays}일 ${targetHour}시 ${targetMin}분 ${targetSec}초 `
+
+        }, 1000)
+
+
+      }
+
+
+      function closeBtnClick(e){
+        console.log("closeBtn Clicked !")
+        // ..... 이게 맞나
+        //const parentDiv = e.target.parentElement.parentElement.parentElement
+        //parentDiv.remove()
+        const parentDivBack= e.target.parentElement.parentElement.parentElement.parentElement
+        parentDivBack.remove()
 
       }
       
