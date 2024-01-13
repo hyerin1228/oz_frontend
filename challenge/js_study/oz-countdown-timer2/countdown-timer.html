@@ -32,21 +32,25 @@
       position: relative;
       height: 80vh;
       width: 100%;
+      /* background-image: url("images/Lovepik_com-400324502-film-frame.png"); */
     }
 
     /* container__topLayer */
     .container__topLayer {
-      height: 90%;
+      height: 100%;
       width: 100%;
       background-color: aliceblue;
       margin: 0 auto;
       justify-content: center;
+      background-image: url("images/Lovepik_com-400324502-film-frame.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 150% 250%;
     }
 
     .container__bottomLayer {
       height: 10%;
       width: 100%;
-      background-color: honeydew;
     }
 
     .flex {
@@ -54,6 +58,7 @@
     }
 
     .frame {
+      margin-top: 50px;
       width: 30%;
       height: 100%;
       flex: 1;
@@ -67,9 +72,21 @@
       overflow: hidden;
     }
 
+    .container__topLayer:hover .frame:not(:hover){
+    filter: blur(1px);
+    -webkit-filter: blur(5px);
+    transform: scale( 0.9 );
+    transition: transform 0.2s linear;
+}
+
+    .frame:hover{
+    filter: none;
+    transform: scale( 1 );
+    transition: transform 0.2s linear;
+    }
+
     
     .display img {
-      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -93,8 +110,17 @@
       box-shadow: 5px 8px 15px rgb(30, 23, 23);
       border-radius: 10px;
       z-index: 22;
+      animation: logoAnimation 0.5s infinite linear;
     }
 
+    @keyframes logoAnimation {
+        0%{
+            opacity: 0.5;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
     /* .date__popup{
       width: 600px;
       height: 400px;
@@ -108,8 +134,9 @@
     } */
 
     .date__popup {
-      width: 600px;
-      height: 400px;
+      position: fixed;
+      width: 400px;
+      height: 300px;
       position: fixed; /* Use fixed positioning to make sure it stays in view */
       top: 50%;
       left: 50%;
@@ -117,6 +144,7 @@
       background-color: white;
       border: 1px solid black;
       z-index: 99;
+      box-shadow: 0 0 10px;
     }
 
     .date__popupbackLayer{
@@ -138,54 +166,69 @@
       margin: 0, auto;
     }
 
+
+    .display__date__content{
+      padding: 40px;
+      border-radius: 0 3px;
+      background: rgba(105, 99, 99, 0.7);
+      box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.3);
+      /* filter: blur(15px); */
+      font-size: 25px;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-weight: 700;
+    }
+
+    .container__bottomLayer{
+      background-image: url("https://file.notion.so/f/f/6bf81cc0-d34e-438c-bb4d-b1deac005f2a/706fe0d5-e155-434a-b1cd-313d2751fd06/Lovepik_com-400324502-film-frame.png?id=50bf8711-ae3b-44e6-8cda-86f6a0b61d9f&table=block&spaceId=6bf81cc0-d34e-438c-bb4d-b1deac005f2a&expirationTimestamp=1705233600000&signature=in3ukE0fDeiDuSfsf4SN36s0Rpio9pcXTAKGE0iDQVc&downloadName=Lovepik_com-400324502-film-frame.png");
+    }
+
     </style>
   </head>
   <body>
-    <div class="header">header</div>
+    <div class="header"></div>
     <div class="container">
       <div class="container__topLayer flex">
         <!-- photo-->
         <div class="frame">
           <div class="display">
-            <img src="/js_study/oz-countdown-timer 2/images/n02100583_9960.jpg">
+            <img src="https://file.notion.so/f/f/6bf81cc0-d34e-438c-bb4d-b1deac005f2a/8aa59279-ddee-4cc8-93a5-b27d54799010/n02100583_9960_(1).jpg?id=6dc6e8d2-8a9c-460b-82b1-f1b5f8f9440e&table=block&spaceId=6bf81cc0-d34e-438c-bb4d-b1deac005f2a&expirationTimestamp=1705276800000&signature=JP2B98VOP_WayTte9tA6aB5IU8atBjJIPl_S5eGCCEk&downloadName=n02100583_9960+%281%29.jpg">
             <button class="dateAddBtn">📅</button>
             <div class="display__date">
             </div>
           </div>
           <div class="display__date__content">
-            <input type="date">
           </div>
         </div>
         <!-- photo-->
         <div class="frame">
           <div class="display">
-            <img src="/js_study/oz-countdown-timer 2/images/n02107312_3474.jpg">
+            <img src="https://pickle-margin-941.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6bf81cc0-d34e-438c-bb4d-b1deac005f2a%2F819db161-8a2a-4d38-a758-8f0038b1b236%2Fn02107312_3474_(1).jpg?table=block&id=cde37c1a-12fe-4cc3-bcb2-8f3154263598&spaceId=6bf81cc0-d34e-438c-bb4d-b1deac005f2a&width=2000&userId=&cache=v2">
             <button class="dateAddBtn">📅</button>
             <div class="display__date">
             </div>
           </div>
           <div class="display__date__content">
-            <input type="date">
           </div>
         </div>
         <!-- photo-->
         <div class="frame">
           <div class="display">
-            <img src="/js_study/oz-countdown-timer 2/images/mamehiko02.jpg">
+            <img src="https://pickle-margin-941.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F6bf81cc0-d34e-438c-bb4d-b1deac005f2a%2Fa4c7329b-1f8d-4294-acd9-681180671fa4%2Fmamehiko02_(1).jpg?table=block&id=8d86825a-5037-47cf-85a4-841c38245e38&spaceId=6bf81cc0-d34e-438c-bb4d-b1deac005f2a&width=2000&userId=&cache=v2">
             <button class="dateAddBtn">📅</button>
             <div class="display__date">
             </div>
           </div>
           <div class="display__date__content">
-            <input type="date">
           </div>
         </div>
       </div>
-      <div class="container__bottomLayer">bottomLayer</div> 
+      <div class="container__bottomLayer"></div> 
     </div>
     <div class="footer">
       © 2023. <a href="https://ozcodingschool.com/" target="_blank">ozcodingschool</a>. All rights
-      reserved. Developed by <a href="#">[수강생 이름]</a>.
+      reserved. Developed by <a href="#">[황혜린]</a>.
     </div>
     <script>
       // JavaScript로 타이머 구현
@@ -216,7 +259,7 @@
         
         // date_popup에 표시될 내용
         popupDiv.innerHTML = `<div class='date__popup__content flex'>
-          <div class="date__popup__content__display">날짜가 표시될 곳</div>
+          <div class="date__popup__content__display"></div>
           <div class="date__popup__content__input">
             <input type="date" onchange='dateHandler(event);' />
             <button class="closeBtn" onclick='closeBtnClick(event);'>닫기</button>
@@ -255,7 +298,7 @@
 
         console.log(e)
         console.dir(e)
-        const targetDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+        const targetDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement // 
 
         const targetDate = new Date(e.target.value)
         
